@@ -1,0 +1,23 @@
+{
+	"name": "dface/gms-notify",
+	"description": "Library to interact with multichannel notification service https://hyber.im/ua",
+	"keywords": ["GMS", "SMS", "Viber", "multichannel notifications"],
+	"type": "library",
+	"license": "MIT",
+	"authors": [{
+		"name": "Denis Ponomarev",
+		"email": "ponomarev@gmail.com"
+	}],
+	"require": {
+		"php": ">=7.0",
+		"psr/log": "1.0.0",
+	    "psr/log-implementation": "1.0.0",
+		"guzzlehttp/guzzle": "^6.2",
+		"roave/security-advisories": "dev-master"
+	},
+	"autoload": {
+		"psr-0": {
+			"": ["src/", "tests/"]
+		}
+	}
+}
