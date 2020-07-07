@@ -9,14 +9,21 @@
 		"email": "ponomarev@gmail.com"
 	}],
 	"require": {
-		"php": ">=7.0",
+		"php": ">=7.2",
 		"psr/log": "~1.0",
-	    "psr/log-implementation": "~1.0",
-		"guzzlehttp/guzzle": "^6.2"
+		"psr/http-client": "^1.0",
+		"psr/http-factory": "^1.0",
+		"ext-json": "*",
+		"ext-mbstring": "*"
 	},
 	"autoload": {
 		"psr-0": {
-			"": ["src/", "tests/"]
+			"dface": ["src/"]
+		}
+	},
+	"autoload-dev": {
+		"psr-0": {
+			"dface": ["tests/"]
 		}
 	}
 }

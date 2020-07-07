@@ -8,6 +8,6 @@ interface GmsMessage extends \JsonSerializable {
 	/**
 	 * @return string
 	 */
-	function getType() : string;
+	public function getType() : string;
 
 }
