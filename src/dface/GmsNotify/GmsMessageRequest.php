@@ -5,20 +5,14 @@ namespace dface\GmsNotify;
 class GmsMessageRequest implements \JsonSerializable
 {
 
-	/** @var GmsPhone */
-	private $phone;
+	private GmsPhone $phone;
 	/** @var GmsMessage[] */
-	private $messages;
-	/** @var  string */
-	private $extra_id;
-	/** @var  bool */
-	private $is_promotional;
-	/** @var string */
-	private $callback_url;
-	/** @var string */
-	private $tag;
-	/** @var \DateTimeImmutable */
-	private $start_time;
+	private array $messages;
+	private ?string $extra_id;
+	private bool $is_promotional;
+	private ?string $callback_url;
+	private ?string $tag;
+	private ?\DateTimeImmutable $start_time;
 
 	private const MAX_TAG_LENGTH = 63;
 
@@ -63,7 +57,7 @@ class GmsMessageRequest implements \JsonSerializable
 		return $this->is_promotional;
 	}
 
-	public function jsonSerialize()
+	public function jsonSerialize() : array
 	{
 		$request = [
 			'phone_number' => $this->phone->getPhone(),
@@ -99,7 +93,7 @@ class GmsMessageRequest implements \JsonSerializable
 		return $request;
 	}
 
-	public static function deserialize($arr) : GmsMessageRequest
+	public static function deserialize($arr) : self
 	{
 		static $classMap = [
 			'sms' => GmsSmsMessage::class,

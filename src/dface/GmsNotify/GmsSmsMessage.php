@@ -11,15 +11,11 @@ class GmsSmsMessage implements \JsonSerializable
 	private const MAX_ASCII_MESSAGE = 765;
 	private const MAX_UTF_MESSAGE = 335;
 
-	/** @var string */
-	private $text;
-	/** @var int */
-	private $ttl;
-	/** @var string */
-	private $alpha_name;
+	private string $text;
+	private int $ttl;
+	private string $alpha_name;
 
 	/**
-	 *
 	 * @param string $text
 	 * @param string $alpha_name
 	 * @param int $ttl
@@ -63,7 +59,7 @@ class GmsSmsMessage implements \JsonSerializable
 		return 'sms';
 	}
 
-	public function jsonSerialize()
+	public function jsonSerialize() : array
 	{
 		return [
 			'text' => $this->text,
@@ -73,11 +69,11 @@ class GmsSmsMessage implements \JsonSerializable
 	}
 
 	/**
-	 * @param $arr
+	 * @param array $arr
 	 * @return GmsSmsMessage
 	 * @throws GmsMessageMalformed
 	 */
-	public static function deserialize($arr) : GmsSmsMessage
+	public static function deserialize(array $arr) : self
 	{
 		return new self(
 			$arr['text'],

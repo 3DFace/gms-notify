@@ -5,10 +5,8 @@ namespace dface\GmsNotify;
 class GmsSettings implements \JsonSerializable
 {
 
-	/** @var GmsServerParams */
-	protected $transactional_server;
-	/** @var GmsServerParams */
-	protected $promotional_server;
+	private GmsServerParams $transactional_server;
+	private GmsServerParams $promotional_server;
 
 	public function __construct(GmsServerParams $transactional_server, GmsServerParams $promotional_server)
 	{
@@ -16,26 +14,16 @@ class GmsSettings implements \JsonSerializable
 		$this->promotional_server = $promotional_server;
 	}
 
-	/**
-	 * @return GmsServerParams
-	 */
 	public function getTransactionalServer() : GmsServerParams
 	{
 		return $this->transactional_server;
 	}
 
-	/**
-	 * @return GmsServerParams
-	 */
 	public function getPromotionalServer() : GmsServerParams
 	{
 		return $this->promotional_server;
 	}
 
-	/**
-	 * @param GmsServerParams $val
-	 * @return self
-	 */
 	public function withTransactionalServer(GmsServerParams $val) : self
 	{
 		$clone = clone $this;
@@ -43,10 +31,6 @@ class GmsSettings implements \JsonSerializable
 		return $clone;
 	}
 
-	/**
-	 * @param GmsServerParams $val
-	 * @return self
-	 */
 	public function withPromotionalServer(GmsServerParams $val) : self
 	{
 		$clone = clone $this;
@@ -54,7 +38,7 @@ class GmsSettings implements \JsonSerializable
 		return $clone;
 	}
 
-	public function jsonSerialize()
+	public function jsonSerialize() : array
 	{
 		return [
 			'transactional_server' => $this->transactional_server !== null ? $this->transactional_server->jsonSerialize() : null,
@@ -62,28 +46,23 @@ class GmsSettings implements \JsonSerializable
 		];
 	}
 
-	/**
-	 * @param array $arr
-	 * @return self
-	 * @throws \InvalidArgumentException
-	 */
-	public static function deserialize(array $arr) : GmsSettings
+	public static function deserialize(array $arr) : self
 	{
 		if (\array_key_exists('transactional_server', $arr)) {
 			$transactional_server = $arr['transactional_server'];
-		}else {
+		} else {
 			throw new \InvalidArgumentException("Property 'transactional_server' not specified");
 		}
 		$transactional_server = $transactional_server !== null ? GmsServerParams::deserialize($transactional_server) : null;
 
 		if (\array_key_exists('promotional_server', $arr)) {
 			$promotional_server = $arr['promotional_server'];
-		}else {
+		} else {
 			throw new \InvalidArgumentException("Property 'promotional_server' not specified");
 		}
 		$promotional_server = $promotional_server !== null ? GmsServerParams::deserialize($promotional_server) : null;
 
-		return new static($transactional_server, $promotional_server);
+		return new self($transactional_server, $promotional_server);
 	}
 
 }

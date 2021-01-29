@@ -13,18 +13,12 @@ class GmsViberMessage implements GmsMessage
 	private const MAX_TTL = 86400;
 	private const MAX_IOS_EXPIRATION_TEXT_LENGTH = 1000;
 
-	/** @var string */
-	private $text;
-	/** @var int */
-	private $ttl;
-	/** @var string */
-	private $caption;
-	/** @var string */
-	private $action;
-	/** @var string */
-	private $img;
-	/** @var string */
-	private $ios_expiration_text;
+	private string $text;
+	private int $ttl;
+	private ?string $caption;
+	private ?string $action;
+	private ?string $img;
+	private ?string $ios_expiration_text;
 
 	/**
 	 * @param string $text
@@ -38,10 +32,10 @@ class GmsViberMessage implements GmsMessage
 	public function __construct(
 		string $text,
 		int $ttl,
-		string $caption = null,
-		string $action = null,
-		string $img = null,
-		string $ios_expiration_text = null
+		?string $caption = null,
+		?string $action = null,
+		?string $img = null,
+		?string $ios_expiration_text = null
 	) {
 
 		$text = \trim($text);
@@ -98,7 +92,7 @@ class GmsViberMessage implements GmsMessage
 		return 'viber';
 	}
 
-	public function jsonSerialize()
+	public function jsonSerialize() : array
 	{
 
 		$channel = [
@@ -127,7 +121,7 @@ class GmsViberMessage implements GmsMessage
 	 * @return GmsViberMessage
 	 * @throws GmsMessageMalformed
 	 */
-	public static function deserialize($arr) : GmsViberMessage
+	public static function deserialize($arr) : self
 	{
 		/** @noinspection SpellCheckingInspection */
 		return new self(

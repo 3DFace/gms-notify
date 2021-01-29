@@ -5,8 +5,7 @@ namespace dface\GmsNotify;
 class GmsPhone
 {
 
-	/** @var string */
-	private $phone;
+	private string $phone;
 
 	public function __construct(string $phone)
 	{
@@ -21,7 +20,7 @@ class GmsPhone
 		return $this->phone;
 	}
 
-	public function __toString()
+	public function __toString() : string
 	{
 		return $this->phone;
 	}

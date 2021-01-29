@@ -5,12 +5,9 @@ namespace dface\GmsNotify;
 class GmsServerParams implements \JsonSerializable
 {
 
-	/** @var string */
-	private $login;
-	/** @var string */
-	private $password;
-	/** @var string */
-	private $url;
+	private string $login;
+	private string $password;
+	private string $url;
 
 	public function __construct(string $login, string $password, string $url)
 	{
@@ -34,7 +31,7 @@ class GmsServerParams implements \JsonSerializable
 		return $this->url;
 	}
 
-	public function jsonSerialize()
+	public function jsonSerialize() : array
 	{
 		return [
 			'login' => $this->login,
@@ -43,7 +40,7 @@ class GmsServerParams implements \JsonSerializable
 		];
 	}
 
-	public static function deserialize(array $arr) : GmsServerParams
+	public static function deserialize(array $arr) : self
 	{
 		return new self($arr['login'], $arr['password'], $arr['url']);
 	}
