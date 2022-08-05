@@ -12,20 +12,16 @@ class GmsSender
 
 	private ClientInterface $httpClient;
 	private RequestFactoryInterface $requestFactory;
-	/** @var callable */
-	private $stringStreamFactory;
 	private LoggerInterface $logger;
 
 	public function __construct(
 		ClientInterface $httpClient,
 		RequestFactoryInterface $requestFactory,
-		LoggerInterface $logger,
-		callable $stringStreamFactory
+		LoggerInterface $logger
 	) {
 		$this->httpClient = $httpClient;
 		$this->requestFactory = $requestFactory;
 		$this->logger = $logger;
-		$this->stringStreamFactory = $stringStreamFactory;
 	}
 
 	/**
@@ -47,13 +43,12 @@ class GmsSender
 
 		try {
 			$this->logger->debug('REQUEST: '.$request_json);
-			$body_steam = ($this->stringStreamFactory)($request_json);
 			$http_request = $this->requestFactory
 				->createRequest('POST', $url)
 				->withHeader('Authorization', 'Basic '.\base64_encode($serverParams->getLogin().':'.$serverParams->getPassword()))
 				->withHeader('Content-Type', 'application/json; charset=utf-8')
-				->withHeader('Content-length', \strlen($request_json))
-				->withBody($body_steam);
+				->withHeader('Content-length', \strlen($request_json));
+			$http_request->getBody()->write($request_json);
 
 			$http_response = $this->httpClient->sendRequest($http_request);
 			$response_json = $http_response->getBody()->getContents();

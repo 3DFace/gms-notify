@@ -41,8 +41,8 @@ class GmsSettings implements \JsonSerializable
 	public function jsonSerialize() : array
 	{
 		return [
-			'transactional_server' => $this->transactional_server !== null ? $this->transactional_server->jsonSerialize() : null,
-			'promotional_server' => $this->promotional_server !== null ? $this->promotional_server->jsonSerialize() : null,
+			'transactional_server' => $this->transactional_server->jsonSerialize(),
+			'promotional_server' => $this->promotional_server->jsonSerialize(),
 		];
 	}
 
