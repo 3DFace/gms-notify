@@ -10,9 +10,9 @@
 	}],
 	"require": {
 		"php": ">=7.4",
-		"psr/log": "~1.0",
-		"psr/http-client": "^1.0",
-		"psr/http-factory": "^1.0",
+		"psr/log": ">=1.0",
+		"psr/http-client": ">=1.0",
+		"psr/http-factory": ">=1.0",
 		"ext-json": "*",
 		"ext-mbstring": "*"
 	},
@@ -24,6 +24,11 @@
 	"autoload-dev": {
 		"psr-0": {
 			"dface": ["tests/"]
+		}
+	},
+	"config": {
+		"platform": {
+			"php": "8.2.5"
 		}
 	}
 }
